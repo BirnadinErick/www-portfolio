@@ -1,5 +1,5 @@
 ---
-name: "Polaris"
+name: "Split Ring Resonators facinate me"
 description: "A modern, minimalist portfolio template built with Astro, designed for developers and designers to showcase their projects beautifully."
 date: 2025-09-01
 cover: "./images/polaris.png"
@@ -113,7 +113,7 @@ const projects = defineCollection({
         z.object({
           text: z.string(),
           url: z.string(),
-        })
+        }),
       ),
     }),
   }),

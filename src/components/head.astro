@@ -1,4 +1,6 @@
 ---
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import siteConfig from "@/config/site.json";
 import { getAbsoluteUrl } from "@/lib/utils";
 
@@ -119,10 +121,14 @@ const twitterTags = [
 <link rel="canonical" href={canonicalUrl}>
 
 <!-- Open Graph Meta Tags -->
-{ogTags.map((tag) => <meta property={tag.property} content={tag.content} />)}
+{ogTags.map((tag) => (
+    <meta property={tag.property} content={tag.content} />
+))}
 
 <!-- Twitter Card Meta Tags -->
-{twitterTags.map((tag) => <meta name={tag.name} content={tag.content} />)}
+{twitterTags.map((tag) => (
+    <meta name={tag.name} content={tag.content} />
+))}
 
 <!-- Additional Meta Tags -->
 <meta name="theme-color" content={themeColor}>
@@ -168,32 +174,36 @@ const twitterTags = [
   src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 ></script>
 
+<!-- Vercel -->
+<Analytics />
+<SpeedInsights />
+
 <!-- Structured Data for SEO -->
 <script
   type="application/ld+json"
   set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.company.name,
-    description: siteConfig.company.description,
-    url: Astro.site?.href || siteConfig.site.url,
-    image: getAbsoluteUrl(
-      "/og-image.png",
-      Astro.site?.href || siteConfig.site.url
-    ),
-    sameAs: [
-      siteConfig.contact.linkedin,
-      siteConfig.contact.github,
-      siteConfig.contact.twitter,
-      siteConfig.contact.dribbble,
-      siteConfig.contact.figma,
-    ].filter(Boolean),
-    jobTitle: "UI Designer & Frontend Developer",
-    worksFor: {
-      "@type": "Organization",
-      name: "Freelance",
-    },
-    knowsAbout: siteConfig.company.specialties,
-    knowsLanguage: ["English", "Spanish"],
-  })}
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: siteConfig.company.name,
+        description: siteConfig.company.description,
+        url: Astro.site?.href || siteConfig.site.url,
+        image: getAbsoluteUrl(
+            "/og-image.png",
+            Astro.site?.href || siteConfig.site.url,
+        ),
+        sameAs: [
+            siteConfig.contact.linkedin,
+            siteConfig.contact.github,
+            siteConfig.contact.twitter,
+            siteConfig.contact.dribbble,
+            siteConfig.contact.figma,
+        ].filter(Boolean),
+        jobTitle: "UI Designer & Frontend Developer",
+        worksFor: {
+            "@type": "Organization",
+            name: "Freelance",
+        },
+        knowsAbout: siteConfig.company.specialties,
+        knowsLanguage: ["English", "Spanish"],
+    })}
 />

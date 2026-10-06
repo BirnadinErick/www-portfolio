@@ -1,5 +1,7 @@
 ![hero](public/image.png)
 
+> setached fork of https://github.com/educlopez/polaris
+
 <p align="center">
 	<h1 align="center"><b>Polaris</b></h1>
 <p align="center">
@@ -70,56 +72,6 @@ Node.js (version 22.12 or higher — required by Astro 7)<br>
 pnpm (recommended)<br>
 Git<br>
 
-## Getting Started
-
-Clone this repo locally with the following command:
-
-```bash
-git clone <repository-url>
-cd polaris
-```
-
-1. Install dependencies using pnpm:
-
-```sh
-pnpm install
-```
-
-2. Start the development server:
-
-```sh
-pnpm dev
-```
-
-3. Open your browser and navigate to `http://localhost:4321`
-
-## How to use
-
-This template is designed to be a starting point for your personal portfolio. It includes everything you need to showcase your work professionally while maintaining excellent performance and user experience.
-
-### Key Features
-
-- **Modern Tech Stack**: Built with Astro for optimal performance and React for interactive components
-- **Responsive Design**: Fully responsive layout that looks great on all devices
-- **Project Showcase**: Dynamic project pages with detailed case studies using MDX
-- **Clean Design**: Minimalist aesthetic with smooth transitions and interactions
-- **Content Management**: Markdown-based content for easy updates and maintenance
-- **Performance Optimized**: Static site generation with optimized images and assets
-- **Accessible**: Built with accessibility in mind using Radix UI primitives
-
-### Available Scripts
-
-| Command          | Action                                           |
-| :--------------- | :----------------------------------------------- |
-| `pnpm dev`       | Starts local dev server at `localhost:4321`      |
-| `pnpm build`     | Build your production site to `./dist/`          |
-| `pnpm preview`   | Preview your build locally, before deploying     |
-| `pnpm check`     | Type-check the project with `astro check`        |
-| `pnpm lint`      | Lint & format check with Biome                   |
-| `pnpm lint:fix`  | Apply safe Biome lint/format fixes               |
-| `pnpm format`    | Format the codebase with Biome                   |
-| `pnpm astro ...` | Run CLI commands like `astro add`, `astro check` |
-
 ## Customization
 
 ### Site Configuration
@@ -145,15 +97,8 @@ Update `src/config/site.json` to modify:
 - Smooth transitions and interactions built with CSS
 - UI components follow a consistent design system
 
-### Deployment
-
-This project can be deployed to any static hosting service:
-
-- **Vercel**: Connect your repository for automatic deployments
-- **Netlify**: Drag and drop the `dist` folder or connect your repository
-- **GitHub Pages**: Use GitHub Actions for automated deployment
-- **Any static hosting**: Upload the contents of the `dist` folder
-
 ## Recognition
 
 Built with ❤️ by [Eduardo Calvo](https://github.com/educlopez) - UI Designer & Frontend Developer based in Madrid, Spain.
+
+Modified by Birnadin Erick.

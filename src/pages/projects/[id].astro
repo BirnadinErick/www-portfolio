@@ -132,9 +132,9 @@ const githubLink = extractGitHubLink(contentText);
   keywords={project.tags?.join(", ") || "web development, case study, project"}
   type="article"
   image={getAbsoluteUrl(
-    project.cover.src,
-    Astro.site?.href || siteConfig.site.url
-  )}
+        typeof project.cover === "string" ? project.cover : project.cover.src,
+        Astro.site?.href || siteConfig.site.url,
+    )}
   publishedTime={project.date.toISOString()}
   section="Projects"
   tags={project.tags || []}
@@ -193,18 +193,29 @@ const githubLink = extractGitHubLink(contentText);
 
       <!-- Project Links -->
       {project.caseStudy.links && (
-          <div class="flex flex-row gap-2">
-            {project.caseStudy.links.map(
-              (link: { url: string; text: string }, index: number) => (
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  <Button variant={index === 0 ? "default" : "outline"}>
-                    {link.text}
-                  </Button>
-                </a>
-              )
+                <div class="flex flex-row gap-2">
+                    {project.caseStudy.links.map(
+                        (
+                            link: { url: string; text: string },
+                            index: number,
+                        ) => (
+                            <a
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Button
+                                    variant={
+                                        index === 0 ? "default" : "outline"
+                                    }
+                                >
+                                    {link.text}
+                                </Button>
+                            </a>
+                        ),
+                    )}
+                </div>
             )}
-          </div>
-        )}
       <!-- Challenge & Solution -->
       <div class="space-y-4">
         <div class="space-y-2">
@@ -224,18 +235,22 @@ const githubLink = extractGitHubLink(contentText);
 
       <!-- GitHub Link (if available) -->
       {githubLink && (
-          <div class="space-y-3">
-            <h3 class="section-title">
-              <Github class="w-4 h-4" />
-              Source Code
-            </h3>
-            <a href={githubLink} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" className="w-full">
-                View on GitHub
-              </Button>
-            </a>
-          </div>
-        )}
+                <div class="space-y-3">
+                    <h3 class="section-title">
+                        <Github class="w-4 h-4" />
+                        Source Code
+                    </h3>
+                    <a
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Button variant="outline" className="w-full">
+                            View on GitHub
+                        </Button>
+                    </a>
+                </div>
+            )}
     </div>
   </Fragment>
 
@@ -261,53 +276,56 @@ const githubLink = extractGitHubLink(contentText);
         <h2 class="text-xl font-semibold mb-6">More Projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {(await getCollection("projects"))
-              .filter((p) => p.id !== entry.id)
-              .sort(
-                (a, b) =>
-                  new Date(b.data.date).getTime() -
-                  new Date(a.data.date).getTime()
-              )
-              .slice(0, 3)
-              .map((project) => (
-                <a
-                  href={`/projects/${project.id}`}
-                  class="block rounded-lg overflow-hidden hover:opacity-95 transition-opacity"
-                >
-                  <div class="aspect-[16/10] relative">
-                    <Image
-                      src={project.data.cover}
-                      alt={project.data.coverAlt}
-                      width="400"
-                      height="250"
-                      class="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div class="absolute bottom-3 left-3 items-center gap-1.5 flex text-foreground opacity-0 hover:opacity-100 transition-opacity">
-                      <div class="shrink-0">
-                        <Image
-                          src={project.data.logo.image}
-                          width="24"
-                          height="24"
-                          alt={`${project.data.name} logo`}
-                          loading="lazy"
-                          decoding="async"
-                          class="w-5 h-5 rounded-full object-cover"
-                          onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')"
-                        />
-                        <div
-                          class={`w-5 h-5 ${project.data.logo.fallback.bgColor} rounded-full hidden items-center justify-center text-white text-xs`}
-                        >
-                          {project.data.logo.fallback.text}
-                        </div>
-                      </div>
-                      <div class="text-xs font-semibold mix-blend-difference text-white drop-shadow-lg">
-                        {project.data.name}
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              ))}
+                        .filter((p) => p.id !== entry.id)
+                        .sort(
+                            (a, b) =>
+                                new Date(b.data.date).getTime() -
+                                new Date(a.data.date).getTime(),
+                        )
+                        .slice(0, 3)
+                        .map((project) => (
+                            <a
+                                href={`/projects/${project.id}`}
+                                class="block rounded-lg overflow-hidden hover:opacity-95 transition-opacity"
+                            >
+                                <div class="aspect-[16/10] relative">
+                                    <Image
+                                        src={project.data.cover}
+                                        alt={project.data.coverAlt}
+                                        width="400"
+                                        height="250"
+                                        class="w-full h-full object-cover"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="absolute bottom-3 left-3 items-center gap-1.5 flex text-foreground opacity-0 hover:opacity-100 transition-opacity">
+                                        <div class="shrink-0">
+                                            <Image
+                                                src={project.data.logo.image}
+                                                width="24"
+                                                height="24"
+                                                alt={`${project.data.name} logo`}
+                                                loading="lazy"
+                                                decoding="async"
+                                                class="w-5 h-5 rounded-full object-cover"
+                                                onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')"
+                                            />
+                                            <div
+                                                class={`w-5 h-5 ${project.data.logo.fallback.bgColor} rounded-full hidden items-center justify-center text-white text-xs`}
+                                            >
+                                                {
+                                                    project.data.logo.fallback
+                                                        .text
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="text-xs font-semibold mix-blend-difference text-white drop-shadow-lg">
+                                            {project.data.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        ))}
         </div>
       </div>
     </div>
