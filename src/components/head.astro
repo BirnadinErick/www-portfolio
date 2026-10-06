@@ -2,6 +2,7 @@
 import siteConfig from "@/config/site.json";
 import { getAbsoluteUrl } from "@/lib/utils";
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 export interface Props {
     author?: string;
@@ -173,8 +174,9 @@ const twitterTags = [
     src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 ></script>
 
-<!-- Vercel Analytics -->
+<!-- Vercel -->
 <Analytics />
+<SpeedInsights />
 
 <!-- Structured Data for SEO -->
 <script
